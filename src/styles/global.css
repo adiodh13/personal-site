@@ -1,3 +1,14 @@
+/* ---------- Display font: CM Geom by Cedric Müller (SIL OFL 1.1) ----------
+   Source: https://github.com/D0MIN0KID/GEOM — licence in public/fonts/CMGeom-OFL.txt */
+
+@font-face {
+  font-family: 'CM Geom';
+  src: url('/fonts/CMGeom-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---------- Theme tokens ---------- */
 
 :root {
@@ -14,7 +25,7 @@
   --accent-contrast: #ffffff;
 
   --font-sans: 'Barlow', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Geom Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'CM Geom', ui-sans-serif, system-ui, sans-serif;
 
   --measure: 620px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -158,8 +169,14 @@ a:hover {
 }
 
 /* ---------- Load animation ----------
-   Add class="reveal" and style="--i: n" to any block; it slowly fades into focus
-   with a slight rise, staggered 180ms per step. */
+   Add class="reveal" and style="--i: n" to any block. Blocks reveal one after another
+   in --i order: each fades into focus over --reveal-duration, then a short pause
+   (--reveal-step minus --reveal-duration) before the next begins. */
+
+:root {
+  --reveal-duration: 900ms;
+  --reveal-step: 1100ms;
+}
 
 @keyframes reveal {
   from {
@@ -175,8 +192,8 @@ a:hover {
 }
 
 .reveal {
-  animation: reveal 1400ms var(--ease-reveal) both;
-  animation-delay: calc(120ms + var(--i, 0) * 180ms);
+  animation: reveal var(--reveal-duration) var(--ease-reveal) both;
+  animation-delay: calc(150ms + var(--i, 0) * var(--reveal-step));
 }
 
 @media (prefers-reduced-motion: reduce) {

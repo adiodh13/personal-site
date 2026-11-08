@@ -18,6 +18,7 @@ Requires Node 22.12+.
 - **Site-wide values** (name, "Currently in", social links, Substack URLs): `src/site.config.ts`
 - **Home page copy**: `src/pages/index.astro`
 - **Colours, type, animation**: `src/styles/global.css`
+- **Name font**: CM Geom by Cedric Müller (SIL OFL), self-hosted in `public/fonts/` with its licence
 ## Adding a page
 
 Create `src/pages/<name>.astro` (e.g. `photos.astro` → `/photos`) and wrap it in the layout:
@@ -33,7 +34,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 ```
 
-Any block with `class="reveal"` and `style="--i: n"` fades slowly into view on load, staggered 180ms per step.
+Any block with `class="reveal"` and `style="--i: n"` fades into view on load, one block after another in `--i` order (timings in `global.css`).
 For a section of many pages (e.g. `/writing/...`), use a folder: `src/pages/writing/index.astro`
 plus `src/pages/writing/[slug].astro`, or an Astro content collection.
 

@@ -2,7 +2,7 @@
 import { site } from '../site.config';
 
 interface Props {
-  /** Stagger index of the first line; the next two follow on. */
+  /** Reveal order index; the whole section reveals as one step. */
   i?: number;
 }
 
@@ -13,12 +13,12 @@ const { i = 0 } = Astro.props;
   Plain GET form: submits to Substack's subscribe page as ?email=…,
   which pre-fills the address so the visitor confirms there. Works without JS.
 -->
-<section class="subscribe" aria-labelledby="subscribe-heading">
-  <p id="subscribe-heading" class="lede reveal" style={`--i: ${i}`}>
+<section class="subscribe reveal" style={`--i: ${i}`} aria-labelledby="subscribe-heading">
+  <p id="subscribe-heading" class="lede">
     Essays on technology, progress and ideas, by email.
   </p>
 
-  <form class="form reveal" style={`--i: ${i + 1}`} action={site.substack.subscribe} method="get">
+  <form class="form" action={site.substack.subscribe} method="get">
     <label for="subscribe-email" class="visually-hidden">Email address</label>
     <input
       id="subscribe-email"
@@ -32,7 +32,7 @@ const { i = 0 } = Astro.props;
     <button type="submit">Subscribe</button>
   </form>
 
-  <p class="note reveal" style={`--i: ${i + 2}`}>You’ll finish signing up on Substack.</p>
+  <p class="note">You’ll finish signing up on Substack.</p>
 </section>
 
 <style>
