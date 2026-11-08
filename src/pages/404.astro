@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Not found">
+  <h1 class="reveal" style="--i: 0">Not found</h1>
+  <p class="reveal" style="--i: 1">That page doesn’t exist. <a href="/">Back home</a>.</p>
+</BaseLayout>
+
+<style>
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 450;
+    margin-bottom: 1.25rem;
+  }
+</style>

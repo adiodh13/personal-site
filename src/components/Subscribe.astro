@@ -1,0 +1,109 @@
+---
+import { site } from '../site.config';
+
+interface Props {
+  /** Stagger index of the first line; the next two follow on. */
+  i?: number;
+}
+
+const { i = 0 } = Astro.props;
+---
+
+<!--
+  Plain GET form: submits to Substack's subscribe page as ?email=…,
+  which pre-fills the address so the visitor confirms there. Works without JS.
+-->
+<section class="subscribe" aria-labelledby="subscribe-heading">
+  <p id="subscribe-heading" class="lede reveal" style={`--i: ${i}`}>
+    Essays on technology, progress and ideas, by email.
+  </p>
+
+  <form class="form reveal" style={`--i: ${i + 1}`} action={site.substack.subscribe} method="get">
+    <label for="subscribe-email" class="visually-hidden">Email address</label>
+    <input
+      id="subscribe-email"
+      name="email"
+      type="email"
+      inputmode="email"
+      autocomplete="email"
+      placeholder="you@example.com"
+      required
+    />
+    <button type="submit">Subscribe</button>
+  </form>
+
+  <p class="note reveal" style={`--i: ${i + 2}`}>You’ll finish signing up on Substack.</p>
+</section>
+
+<style>
+  .subscribe {
+    margin-top: 4rem;
+  }
+
+  .lede {
+    color: var(--heading);
+    transition: var(--theme-transition);
+  }
+
+  .form {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+  }
+
+  input,
+  button {
+    font: inherit;
+    font-size: 0.9375rem;
+    height: 2.75rem;
+    border-radius: 8px;
+    transition: var(--theme-transition), box-shadow 200ms ease, opacity 200ms ease;
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+    padding: 0 0.9rem;
+    color: var(--heading);
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  input::placeholder {
+    color: var(--muted);
+    opacity: 1;
+  }
+
+  input:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+
+  button {
+    flex: none;
+    padding: 0 1.15rem;
+    font-weight: 500;
+    color: var(--accent-contrast);
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    cursor: pointer;
+  }
+
+  button:hover {
+    opacity: 0.88;
+  }
+
+  .note {
+    margin-top: 0.6rem;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    transition: var(--theme-transition);
+  }
+
+  @media (max-width: 420px) {
+    .form {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,162 @@
+/* ---------- Theme tokens ---------- */
+
+:root {
+  color-scheme: light dark;
+
+  /* Light */
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --border: #dcdde3;
+  --heading: #111319;
+  --text: #33373f;
+  --muted: #6b707c;
+  --accent: #4b49c0;
+  --accent-contrast: #ffffff;
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Newsreader Variable', ui-serif, Georgia, 'Times New Roman', serif;
+
+  --measure: 620px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --theme-transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease,
+    text-decoration-color 200ms ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111319;
+    --surface: #151820;
+    --border: #262a36;
+    --heading: #f5f7fc;
+    --text: #bdc3d2;
+    --muted: #8a90a0;
+    --accent: #9190f4;
+    --accent-contrast: #111319;
+  }
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: var(--theme-transition);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--heading);
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0;
+  transition: var(--theme-transition);
+}
+
+p {
+  margin: 0;
+}
+
+/* ---------- Links: in the flow, subtle underline ---------- */
+
+a {
+  color: var(--accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent);
+  transition: var(--theme-transition);
+}
+
+a:hover {
+  text-decoration-color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+/* ---------- Layout ---------- */
+
+.page {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: clamp(4rem, 14vh, 9rem) 1.5rem 3rem;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page main {
+  flex: 1;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Load animation ----------
+   Add class="reveal" and style="--i: n" to any block; it slides up and fades in,
+   staggered 80ms per step. */
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal {
+  animation: reveal 500ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

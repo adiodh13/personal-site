@@ -1,0 +1,23 @@
+---
+import { site } from '../site.config';
+
+interface Props {
+  /** Stagger index for the load animation. */
+  i?: number;
+}
+
+const { i = 6 } = Astro.props;
+---
+
+<footer class="reveal" style={`--i: ${i}`}>
+  <p>Currently in: {site.currentlyIn}</p>
+</footer>
+
+<style>
+  footer {
+    margin-top: 5rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    transition: var(--theme-transition);
+  }
+</style>

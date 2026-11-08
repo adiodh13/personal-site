@@ -1,0 +1,32 @@
+---
+import { site } from '../site.config';
+
+interface Props {
+  i?: number;
+}
+
+const { i = 0 } = Astro.props;
+---
+
+<p class="social reveal" style={`--i: ${i}`}>
+  {
+    site.social.map((link, idx) => (
+      <>
+        {idx > 0 && <span class="sep" aria-hidden="true">·</span>}
+        <a href={link.href} rel="me noopener" target="_blank">
+          {link.label}
+        </a>
+      </>
+    ))
+  }
+</p>
+
+<style>
+  .social {
+    margin-top: 1.5rem;
+  }
+  .sep {
+    margin: 0 0.6em;
+    color: var(--muted);
+  }
+</style>

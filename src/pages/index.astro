@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import Subscribe from '../components/Subscribe.astro';
+import { site } from '../site.config';
+---
+
+<BaseLayout>
+  <h1 class="name reveal" style="--i: 0">{site.name}</h1>
+
+  <p class="bio reveal" style="--i: 1">
+    I’m Adi, an Architectural Engineering graduate based in London. I write about technology,
+    progress, economics and a little philosophy in
+    <a href={site.substack.publication}>Ignition Cycles</a>, and I built
+    <a href="https://thecarerscompass.com">The Carer’s Compass</a>, a free guide for unpaid carers.
+  </p>
+
+  <SocialLinks i={2} />
+
+  <Subscribe i={3} />
+</BaseLayout>
+
+<style>
+  .name {
+    font-family: var(--font-serif);
+    font-size: clamp(2.25rem, 6vw, 2.875rem);
+    font-weight: 450;
+    letter-spacing: -0.015em;
+    margin-bottom: 1.75rem;
+  }
+</style>
