@@ -18,13 +18,6 @@ Requires Node 22.12+.
 - **Site-wide values** (name, "Currently in", social links, Substack URLs): `src/site.config.ts`
 - **Home page copy**: `src/pages/index.astro`
 - **Colours, type, animation**: `src/styles/global.css`
-
-### Name font (Raceday)
-
-Raceday isn't openly licensed, so it isn't bundled; the name falls back to Barlow Condensed.
-To use it, add a licensed web font file at `public/fonts/Raceday-Regular.woff2` and uncomment the
-`@font-face` block at the top of `src/styles/global.css`.
-
 ## Adding a page
 
 Create `src/pages/<name>.astro` (e.g. `photos.astro` → `/photos`) and wrap it in the layout:
@@ -40,7 +33,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 ```
 
-Any block with `class="reveal"` and `style="--i: n"` slides up on load, staggered 80ms per step.
+Any block with `class="reveal"` and `style="--i: n"` fades slowly into view on load, staggered 180ms per step.
 For a section of many pages (e.g. `/writing/...`), use a folder: `src/pages/writing/index.astro`
 plus `src/pages/writing/[slug].astro`, or an Astro content collection.
 
