@@ -19,6 +19,12 @@ Requires Node 22.12+.
 - **Home page copy**: `src/pages/index.astro`
 - **Colours, type, animation**: `src/styles/global.css`
 
+### Name font (Raceday)
+
+Raceday isn't openly licensed, so it isn't bundled; the name falls back to Barlow Condensed.
+To use it, add a licensed web font file at `public/fonts/Raceday-Regular.woff2` and uncomment the
+`@font-face` block at the top of `src/styles/global.css`.
+
 ## Adding a page
 
 Create `src/pages/<name>.astro` (e.g. `photos.astro` → `/photos`) and wrap it in the layout:
