@@ -11,19 +11,18 @@ const { i = 0 } = Astro.props;
 <p class="social reveal" style={`--i: ${i}`}>
   {
     site.social.map((link, idx) => (
-      <>
+      <Fragment>
         {idx > 0 && <span class="sep" aria-hidden="true">·</span>}
-        <a href={link.href} rel="me noopener" target="_blank">
-          {link.label}
-        </a>
-      </>
+        <a href={link.href} rel="me noopener" target="_blank">{link.label}</a>
+      </Fragment>
     ))
   }
 </p>
 
 <style>
   .social {
-    margin-top: 1.5rem;
+    margin-top: 1.75rem;
+    text-align: center;
   }
   .sep {
     margin: 0 0.6em;

@@ -14,7 +14,7 @@
   --accent-contrast: #ffffff;
 
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-serif: 'Newsreader Variable', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-serif: 'Fraunces Variable', ui-serif, Georgia, 'Times New Roman', serif;
 
   --measure: 620px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -22,8 +22,10 @@
     text-decoration-color 200ms ease;
 }
 
+/* Dark: follows the system unless the visitor picked light with the toggle,
+   or forced on when they picked dark. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
     --bg: #111319;
     --surface: #151820;
     --border: #262a36;
@@ -33,6 +35,22 @@
     --accent: #9190f4;
     --accent-contrast: #111319;
   }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #111319;
+  --surface: #151820;
+  --border: #262a36;
+  --heading: #f5f7fc;
+  --text: #bdc3d2;
+  --muted: #8a90a0;
+  --accent: #9190f4;
+  --accent-contrast: #111319;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
 }
 
 /* ---------- Base ---------- */
@@ -107,11 +125,17 @@ a:hover {
 .page {
   max-width: var(--measure);
   margin: 0 auto;
-  padding: clamp(4rem, 14vh, 9rem) 1.5rem 3rem;
+  padding: 1.25rem 1.5rem 3rem;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: clamp(2.5rem, 12vh, 7.5rem);
 }
 
 .page main {

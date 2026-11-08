@@ -1,8 +1,9 @@
 ---
 import '@fontsource-variable/inter/opsz.css';
-import '@fontsource-variable/newsreader/opsz.css';
+import '@fontsource-variable/fraunces/opsz.css';
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 import { site } from '../site.config';
 
 interface Props {
@@ -22,6 +23,13 @@ const fullTitle = title ? `${title} · ${site.title}` : site.title;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <!-- Apply a saved theme choice before first paint (no flash). -->
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
     <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#111319" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -32,6 +40,9 @@ const fullTitle = title ? `${title} · ${site.title}` : site.title;
   </head>
   <body>
     <div class="page">
+      <header class="topbar">
+        <ThemeToggle />
+      </header>
       <main>
         <slot />
       </main>

@@ -1,0 +1,59 @@
+---
+// Text toggle between light and dark. Defaults to the visitor's system setting;
+// an explicit choice is saved in localStorage and applied in BaseLayout's <head>.
+---
+
+<button type="button" class="theme-toggle" data-theme-toggle>
+  <span data-label>Light</span>
+</button>
+
+<script>
+  const root = document.documentElement;
+  const button = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const label = button?.querySelector<HTMLElement>('[data-label]');
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+
+  const current = () => root.dataset.theme ?? (media.matches ? 'dark' : 'light');
+
+  function render() {
+    if (!button || !label) return;
+    const next = current() === 'dark' ? 'light' : 'dark';
+    label.textContent = next === 'dark' ? 'Dark' : 'Light';
+    button.setAttribute('aria-label', `Switch to ${next} theme`);
+  }
+
+  button?.addEventListener('click', () => {
+    const next = current() === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch {}
+    render();
+  });
+
+  media.addEventListener('change', render);
+  render();
+</script>
+
+<style>
+  .theme-toggle {
+    font: inherit;
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    background: none;
+    border: none;
+    padding: 0.25rem 0;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+    text-decoration-color: transparent;
+    transition: var(--theme-transition);
+  }
+
+  .theme-toggle:hover {
+    color: var(--heading);
+    text-decoration-color: currentColor;
+  }
+</style>
